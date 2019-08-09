@@ -1,6 +1,6 @@
 package com.maiconhellmann.domain.repository
 
-import com.maiconhellmann.domain.entity.BaseRate
+import com.maiconhellmann.domain.entity.Rate
 import io.reactivex.Single
 
 /*
@@ -10,5 +10,5 @@ import io.reactivex.Single
  * 
  * (c) 2019 
  */interface RateRepository {
-    fun getRateByCurrency(base: String): Single<BaseRate>
+    fun getRateByCurrency(base: String): Single<List<Rate>>
 }

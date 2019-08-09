@@ -10,16 +10,28 @@ import com.maiconhellmann.domain.entity.Rate
  * 
  * (c) 2019 
  */object RateCacheMapper {
-    fun map(list: List<RateCache>): List<Rate> {
-        return list.map { map(it) }
+    fun mapToDomain(list: List<RateCache>): List<Rate> {
+        return list.map { mapToDomain(it) }
     }
 
-    private fun map(cache: RateCache): Rate {
+    private fun mapToDomain(cache: RateCache): Rate {
         return Rate(
             base = cache.base,
             currency = cache.currency,
             date = cache.date,
             value = cache.value
+        )
+    }
+
+    fun mapFromDomain(domain: List<Rate>): List<RateCache> {
+        return domain.map { RateCacheMapper.mapFromDomain(it) }
+    }
+    fun mapFromDomain(domain: Rate): RateCache {
+        return RateCache(
+            base = domain.base,
+            currency = domain.currency,
+            date = domain.date,
+            value = domain.value
         )
     }
 }

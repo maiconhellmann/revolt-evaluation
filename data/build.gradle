@@ -54,6 +54,7 @@ dependencies {
     kapt dependencies.roomCompiler
 
     implementation dependencies.koin
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$rootProject.kotlinVersion"
 
     implementation dependencies.logginInterceptor
 

@@ -13,6 +13,8 @@ import io.reactivex.Single
  * (c) 2019 
  */class RateRemoteDataSource(private val api: RateApi) {
     fun fetchRate(base: String): Single<List<Rate>> {
-        return api.fetchRates(base).map { RatePayloadMapper.mapToDomain(it) }
+        return api.fetchRates(base).map {
+            RatePayloadMapper.mapToDomain(it)
+        }
     }
 }

@@ -16,7 +16,8 @@ import io.reactivex.Single
     fun getRateByBaseCurrency(base: String): Single<List<Rate>> {
         return rateDao.getAllByBaseCurrency(base).map { RateCacheMapper.mapToDomain(it) }
     }
-    fun updateRates(list: List<RateCache>) {
-        rateDao.updateAll(list)
+
+    fun updateRates(base: String, list: List<RateCache>) {
+        rateDao.updateAll(base, list)
     }
 }

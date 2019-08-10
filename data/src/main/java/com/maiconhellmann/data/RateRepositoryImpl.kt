@@ -23,7 +23,7 @@ import io.reactivex.Single
 
     override fun fetchRates(base: String): Single<List<Rate>> {
         return remoteDataSource.fetchRate(base).map {
-            cacheDataSource.updateRates(RateCacheMapper.mapFromDomain(it))
+            cacheDataSource.updateRates(base, RateCacheMapper.mapFromDomain(it))
             it
         }
     }

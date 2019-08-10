@@ -3,6 +3,8 @@ package com.maiconhellmann.data.remote.mapper
 import com.maiconhellmann.data.local.model.RateCache
 import com.maiconhellmann.data.remote.model.BaseRatePayload
 import com.maiconhellmann.domain.entity.Rate
+import kotlin.reflect.KProperty1
+import kotlin.reflect.full.memberProperties
 
 /*
  * This file is part of Revoltevaluation.
@@ -12,9 +14,9 @@ import com.maiconhellmann.domain.entity.Rate
  * (c) 2019 
  */object RatePayloadMapper {
     fun mapToDomain(payload: BaseRatePayload): List<Rate>{
-        return payload.rates::class.java.fields.map {
+        return payload.rates::class.memberProperties.map {
             val currency = it.name
-            val value = it.getDouble(it)
+            val value = readInstanceProperty(payload.rates, currency) ?: 0.0
 
             Rate(
                 base = payload.base,
@@ -38,4 +40,13 @@ import com.maiconhellmann.domain.entity.Rate
             )
         }
     }
+}
+
+@Suppress("UNCHECKED_CAST")
+fun <R> readInstanceProperty(instance: Any, propertyName: String): R {
+    val property = instance::class.memberProperties
+        // don't cast here to <Any, R>, it would succeed silently
+        .first { it.name == propertyName } as KProperty1<Any, *>
+    // force a invalid cast exception if incorrect type here
+    return property.get(instance) as R
 }

@@ -13,20 +13,25 @@ import io.reactivex.Single
  * (c) 2019 
  */class RateUseCase(private val repository: RateRepository, private val scheduler: Scheduler) {
 
+    companion object {
+        const val CURRENCY_DEFAULT_BASE = "EUR"
+        const val CURRENCY_DEFAULT_VALUE = 1.0
+    }
+
     /**
      * Get the currency calculated based on the value passed as a parameter
      */
-    fun getCalculatedRateByBase(base: String, currentValue: Double): Single<List<Rate>> {
+    fun getCalculatedRateByBase(base: String? = null, currentValue: Double? = null): Single<List<Rate>> {
         //TODO calculations based on current value
-        return repository.getRateByCurrency(base)
+        return repository.getRateByCurrency(base ?: CURRENCY_DEFAULT_BASE)
             .subscribeOn(scheduler)
     }
 
     /**
      * Fetch rates from remote API and updates local cache
      */
-    fun fetchRates(base: String): Single<List<Rate>> {
-        return repository.fetchRates(base)
+    fun fetchRates(base: String?= null): Single<List<Rate>> {
+        return repository.fetchRates(base ?: CURRENCY_DEFAULT_BASE)
             .subscribeOn(scheduler)
     }
 }

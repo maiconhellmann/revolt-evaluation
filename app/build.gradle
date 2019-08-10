@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
@@ -46,4 +46,24 @@ dependencies {
 
     def dependencies = rootProject.ext.dependencies
     def testDependencies = rootProject.ext.testDependencies
+
+    implementation dependencies.appCompat
+    implementation dependencies.constraintLayout
+    implementation dependencies.recyclerView
+
+    implementation dependencies.kotlin
+    implementation dependencies.ktx
+
+    implementation dependencies.viewModel
+    implementation dependencies.lifeCycle
+
+    implementation dependencies.koin
+    implementation dependencies.koinViewModel
+    implementation dependencies.koinScope
+
+    implementation dependencies.rxJava
+    implementation dependencies.rxAndroid
+    implementation dependencies.rxKotlin
+
+    kapt dependencies.dataBinding
 }

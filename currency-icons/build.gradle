@@ -1,0 +1,31 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+    defaultConfig {
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+}
+
+dependencies {
+    def dependencies = rootProject.ext.dependencies
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation dependencies.kotlin
+    implementation dependencies.ktx
+
+
+    implementation dependencies.glide
+    kapt dependencies.glideCompiler
+
+    implementation dependencies.koin
+    implementation dependencies.koinViewModel
+    implementation dependencies.koinScope
+}

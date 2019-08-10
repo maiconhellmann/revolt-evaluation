@@ -1,15 +1,15 @@
 package com.maiconhellmann.revoltevaluation.feature.currency
 
-import android.icu.util.Currency
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.maiconhellmann.domain.entity.Rate
+import com.maiconhellmann.icons.CurrencyIconLoader
 import com.maiconhellmann.revoltevaluation.R
 import com.maiconhellmann.revoltevaluation.util.extensions.getString
 import com.maiconhellmann.revoltevaluation.util.extensions.inflate
 import kotlinx.android.synthetic.main.item_currency.view.*
 
-class CurrencyAdapter : RecyclerView.Adapter<CurrencyAdapter.ViewHolder>() {
+class CurrencyAdapter(private val currencyIconLoader: CurrencyIconLoader) : RecyclerView.Adapter<CurrencyAdapter.ViewHolder>() {
 
     var rateList: List<Rate> = listOf()
         set(value) {
@@ -26,6 +26,8 @@ class CurrencyAdapter : RecyclerView.Adapter<CurrencyAdapter.ViewHolder>() {
             textViewCurrencyDisplayName.text = model.currencyDisplayName
 
             editTextCurrencyValue.setText(getString(R.string.currency_value, model.value))
+
+            currencyIconLoader.load(model.currency, imageViewCountryFlag)
 
             itemView
         }

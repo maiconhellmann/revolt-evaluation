@@ -14,7 +14,7 @@ import org.koin.dsl.module
  * (c) 2019 
  */
 val presentationModule = module {
-    factory { CurrencyAdapter() }
+    factory { CurrencyAdapter(currencyIconLoader = get()) }
 
     viewModel {
         CurrencyViewModel(useCase = get(), uiScheduler = AndroidSchedulers.mainThread())

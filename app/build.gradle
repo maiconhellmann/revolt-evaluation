@@ -13,6 +13,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -43,6 +44,7 @@ android {
 dependencies {
     implementation project(path: ':data')
     implementation project(path: ':domain')
+    implementation project(path: ':currency-icons')
 
     def dependencies = rootProject.ext.dependencies
     def testDependencies = rootProject.ext.testDependencies
@@ -64,6 +66,8 @@ dependencies {
     implementation dependencies.rxJava
     implementation dependencies.rxAndroid
     implementation dependencies.rxKotlin
+
+    implementation dependencies.multidex
 
     kapt dependencies.dataBinding
 }

@@ -3,6 +3,7 @@ package com.maiconhellmann.revoltevaluation
 import android.app.Application
 import com.maiconhellmann.data.di.dataModules
 import com.maiconhellmann.domain.di.domainModule
+import com.maiconhellmann.icons.di.currencyIconLoaderModule
 import com.maiconhellmann.revoltevaluation.di.presentationModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -21,7 +22,7 @@ import org.koin.core.context.startKoin
             // declare used Android context
             androidContext(this@PresentationApplication)
             // declare modules
-            modules(dataModules + domainModule + presentationModule)
+            modules(dataModules + domainModule + presentationModule + currencyIconLoaderModule)
         }
     }
 }

@@ -13,7 +13,7 @@ import com.maiconhellmann.data.local.model.RateCache
  * 
  * (c) 2019
  */
-@Database(version = 1, entities = [RateCache::class], exportSchema = false)
+@Database(version = 2, entities = [RateCache::class], exportSchema = false)
 abstract class RateDataBase : RoomDatabase() {
     abstract fun rateDao(): RateDao
 

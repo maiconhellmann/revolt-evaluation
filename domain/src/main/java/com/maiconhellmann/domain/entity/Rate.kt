@@ -4,5 +4,6 @@ data class Rate(
     val base: String,
     val date: String,
     val currency: String,
+    val currencyDisplayName: String,
     val value: Double
 )

@@ -6,20 +6,58 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/textViewCurrencyName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/imageViewCountryFlag"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="12dp"
+        android:contentDescription="@string/country_flag"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="EUR" />
+        tools:src="@drawable/ic_launcher_background" />
 
     <TextView
-        android:id="@+id/textViewCurrencyValue"
+        android:id="@+id/textViewCurrencyCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toRightOf="@id/textViewCurrencyName"
+        android:layout_marginStart="8dp"
+        android:textColor="#333"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/guideMidle"
+        app:layout_constraintLeft_toRightOf="@id/imageViewCountryFlag"
+        app:layout_constraintTop_toTopOf="@id/imageViewCountryFlag"
+        tools:text="EUR" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideMidle"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewCurrencyDisplayName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/imageViewCountryFlag"
+        app:layout_constraintLeft_toRightOf="@id/imageViewCountryFlag"
+        app:layout_constraintTop_toTopOf="@id/guideMidle"
+        tools:text="£500" />
+
+    <EditText
+        android:id="@+id/editTextCurrencyValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:hint="@string/currency"
+        android:inputType="number|numberDecimal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="£500"
-        android:layout_marginLeft="8dp"/>
+        tools:text="111.06" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,7 @@
 package com.maiconhellmann.data.local.mapper
 
+import android.icu.util.Currency
+import com.maiconhellmann.data.common.CurrencyDataProvider
 import com.maiconhellmann.data.local.model.RateCache
 import com.maiconhellmann.domain.entity.Rate
 
@@ -19,19 +21,21 @@ import com.maiconhellmann.domain.entity.Rate
             base = cache.base,
             currency = cache.currency,
             date = cache.date,
-            value = cache.value
+            value = cache.value,
+            currencyDisplayName = cache.currencyDisplayName
         )
     }
 
     fun mapFromDomain(domain: List<Rate>): List<RateCache> {
-        return domain.map { RateCacheMapper.mapFromDomain(it) }
+        return domain.map { mapFromDomain(it) }
     }
-    fun mapFromDomain(domain: Rate): RateCache {
+    private fun mapFromDomain(domain: Rate): RateCache {
         return RateCache(
             base = domain.base,
             currency = domain.currency,
             date = domain.date,
-            value = domain.value
+            value = domain.value,
+            currencyDisplayName = CurrencyDataProvider.getCurrency(domain.currency)
         )
     }
 }

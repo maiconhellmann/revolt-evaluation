@@ -1,7 +1,6 @@
 package com.maiconhellmann.data.local.model
 
 import androidx.room.Entity
-import androidx.room.PrimaryKey
 
 /*
  * This file is part of Revoltevaluation.
@@ -15,5 +14,6 @@ class RateCache(
     val base: String,
     val date: String,
     val currency: String,
+    val currencyDisplayName: String,
     val value: Double
 )

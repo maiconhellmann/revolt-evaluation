@@ -1,5 +1,6 @@
 package com.maiconhellmann.data.remote.mapper
 
+import com.maiconhellmann.data.common.CurrencyDataProvider
 import com.maiconhellmann.data.local.model.RateCache
 import com.maiconhellmann.data.remote.model.BaseRatePayload
 import com.maiconhellmann.domain.entity.Rate
@@ -22,7 +23,8 @@ import kotlin.reflect.full.memberProperties
                 base = payload.base,
                 date = payload.date,
                 value = value,
-                currency = currency
+                currency = currency,
+                currencyDisplayName = CurrencyDataProvider.getCurrency(currency)
             )
         }
     }
@@ -36,7 +38,8 @@ import kotlin.reflect.full.memberProperties
                 base = payload.base,
                 date = payload.date,
                 value = value,
-                currency = currency
+                currency = currency,
+                currencyDisplayName = CurrencyDataProvider.getCurrency(currency)
             )
         }
     }

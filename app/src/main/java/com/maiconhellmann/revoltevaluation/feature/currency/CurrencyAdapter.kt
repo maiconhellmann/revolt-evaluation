@@ -1,12 +1,13 @@
 package com.maiconhellmann.revoltevaluation.feature.currency
 
+import android.icu.util.Currency
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.maiconhellmann.domain.entity.Rate
 import com.maiconhellmann.revoltevaluation.R
+import com.maiconhellmann.revoltevaluation.util.extensions.getString
 import com.maiconhellmann.revoltevaluation.util.extensions.inflate
-import kotlinx.android.synthetic.main.item_currency.view.textViewCurrencyName
-import kotlinx.android.synthetic.main.item_currency.view.textViewCurrencyValue
+import kotlinx.android.synthetic.main.item_currency.view.*
 
 class CurrencyAdapter : RecyclerView.Adapter<CurrencyAdapter.ViewHolder>() {
 
@@ -20,8 +21,11 @@ class CurrencyAdapter : RecyclerView.Adapter<CurrencyAdapter.ViewHolder>() {
         RecyclerView.ViewHolder(parent.inflate(R.layout.item_currency)) {
 
         fun bind(model: Rate) = with(itemView) {
-            textViewCurrencyName.text = model.currency
-            textViewCurrencyValue.text = model.value.toString()
+            textViewCurrencyCode.text = model.currency
+
+            textViewCurrencyDisplayName.text = model.currencyDisplayName
+
+            editTextCurrencyValue.setText(getString(R.string.currency_value, model.value))
 
             itemView
         }

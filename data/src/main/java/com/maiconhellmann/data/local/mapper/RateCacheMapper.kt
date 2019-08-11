@@ -12,8 +12,8 @@ import com.maiconhellmann.domain.entity.Rate
  * 
  * (c) 2019 
  */object RateCacheMapper {
-    fun mapToDomain(list: List<RateCache>): List<Rate> {
-        return list.map { mapToDomain(it) }
+    fun mapToDomain(list: List<RateCache>): MutableList<Rate> {
+        return list.map { mapToDomain(it) }.toMutableList()
     }
 
     private fun mapToDomain(cache: RateCache): Rate {

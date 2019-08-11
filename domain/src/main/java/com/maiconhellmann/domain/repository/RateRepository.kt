@@ -10,6 +10,6 @@ import io.reactivex.Single
  * 
  * (c) 2019 
  */interface RateRepository {
-    fun getRateByCurrency(base: String): Single<List<Rate>>
+    fun getRateByCurrency(base: String, baseValue: Double): Single<List<Rate>>
     fun fetchRates(base: String): Single<List<Rate>>
 }

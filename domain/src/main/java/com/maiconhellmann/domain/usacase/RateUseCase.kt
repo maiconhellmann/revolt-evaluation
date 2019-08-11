@@ -23,7 +23,7 @@ import io.reactivex.Single
      */
     fun getCalculatedRateByBase(base: String? = null, currentValue: Double? = null): Single<List<Rate>> {
         //TODO calculations based on current value
-        return repository.getRateByCurrency(base ?: CURRENCY_DEFAULT_BASE)
+        return repository.getRateByCurrency(base ?: CURRENCY_DEFAULT_BASE, currentValue ?: CURRENCY_DEFAULT_VALUE)
             .subscribeOn(scheduler)
     }
 

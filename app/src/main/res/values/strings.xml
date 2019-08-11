@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Revolt evaluation</string>
+    <string name="currency_title">Rates</string>
     <string name="country_flag">Country flag</string>
     <string name="currency">Currency</string>
     <string name="currency_value">%1$.2f</string>

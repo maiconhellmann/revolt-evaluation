@@ -19,6 +19,11 @@ class CurrencyActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        getString(R.string.currency_title).let { title->
+            actionBar?.title = title
+            supportActionBar?.title = title
+        }
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_currency)
 
         binding.lifecycleOwner = this

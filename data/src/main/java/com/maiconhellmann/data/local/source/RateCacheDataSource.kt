@@ -1,5 +1,6 @@
 package com.maiconhellmann.data.local.source
 
+import com.maiconhellmann.data.common.CurrencyDataProvider
 import com.maiconhellmann.data.local.database.RateDao
 import com.maiconhellmann.data.local.mapper.RateCacheMapper
 import com.maiconhellmann.data.local.model.RateCache
@@ -13,8 +14,20 @@ import io.reactivex.Single
  * 
  * (c) 2019 
  */class RateCacheDataSource(private val rateDao: RateDao) {
-    fun getRateByBaseCurrency(base: String): Single<List<Rate>> {
-        return rateDao.getAllByBaseCurrency(base).map { RateCacheMapper.mapToDomain(it) }
+    fun getRateByBaseCurrency(base: String, baseValue: Double): Single<List<Rate>> {
+        return rateDao.getAllByBaseCurrency(base).map {
+            RateCacheMapper.mapToDomain(it).apply {
+                //add the base currency
+                this.add(
+                    0,
+                    Rate(
+                        base,
+                        this.firstOrNull()?.date ?: "",
+                        base,
+                        CurrencyDataProvider.getCurrency(base),
+                        baseValue))
+            }
+        }
     }
 
     fun updateRates(base: String, list: List<RateCache>) {

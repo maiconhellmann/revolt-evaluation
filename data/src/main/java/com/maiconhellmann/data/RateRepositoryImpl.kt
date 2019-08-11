@@ -18,7 +18,7 @@ import io.reactivex.Single
     private val remoteDataSource: RateRemoteDataSource
 ) : RateRepository {
     override fun getRateByCurrency(base: String, baseValue: Double): Single<List<Rate>> {
-        return cacheDataSource.getRateByBaseCurrency(base, baseValue)
+        return cacheDataSource.getRateByBaseCurrency(base)
     }
 
     override fun fetchRates(base: String): Single<List<Rate>> {

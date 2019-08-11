@@ -5,5 +5,5 @@ data class Rate(
     val date: String,
     val currency: String,
     val currencyDisplayName: String,
-    val value: Double
+    var value: Double
 )

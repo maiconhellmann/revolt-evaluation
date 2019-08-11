@@ -22,9 +22,23 @@ import io.reactivex.Single
      * Get the currency calculated based on the value passed as a parameter
      */
     fun getCalculatedRateByBase(base: String? = null, currentValue: Double? = null): Single<List<Rate>> {
-        //TODO calculations based on current value
         return repository.getRateByCurrency(base ?: CURRENCY_DEFAULT_BASE, currentValue ?: CURRENCY_DEFAULT_VALUE)
             .subscribeOn(scheduler)
+            .map { rateList->
+                val percent = currentValue ?: CURRENCY_DEFAULT_VALUE
+                //calculate
+                rateList.forEach { rate->
+                    //ignore base currency
+                    if (rate.currency != rate.base) {
+                        rate.value = if (percent <= 0.0) {
+                            0.0
+                        } else {
+                            rate.value * percent
+                        }
+                    }
+                }
+                rateList
+            }
     }
 
     /**

@@ -2,6 +2,7 @@ package com.maiconhellmann.revoltevaluation.feature.currency
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.maiconhellmann.revoltevaluation.R
@@ -34,6 +35,15 @@ class CurrencyActivity : AppCompatActivity() {
 
     private fun setupRecyclerView() {
         binding.recyclerView.adapter = adapter
+        adapter.onBaseCurrencyChanged = { currency, value ->
+            Log.d(CurrencyActivity::class.java.simpleName, "onBaseCurrencyChanged currency: $currency, value: $value")
+
+            viewModel.fetchCurrency(currency, value)
+        }
+        adapter.onBaseCurrencyValueChanged = { currency, value ->
+            Log.d(CurrencyActivity::class.java.simpleName, "onBaseCurrencyValueChanged currency: $currency, value: $value")
+            viewModel.getCurrencyListByBase(currency, value)
+        }
     }
 
     private fun setupViewModel() {

@@ -14,18 +14,17 @@ import io.reactivex.Single
  * 
  * (c) 2019 
  */class RateCacheDataSource(private val rateDao: RateDao) {
-    fun getRateByBaseCurrency(base: String, baseValue: Double): Single<List<Rate>> {
-        return rateDao.getAllByBaseCurrency(base).map {
-            RateCacheMapper.mapToDomain(it).apply {
-                //add the base currency
-                this.add(
-                    0,
-                    Rate(
-                        base,
-                        this.firstOrNull()?.date ?: "",
-                        base,
-                        CurrencyDataProvider.getCurrency(base),
-                        baseValue))
+    fun getRateByBaseCurrency(base: String): Single<List<Rate>> {
+        return rateDao.getAllByBaseCurrency(base).map { result->
+            RateCacheMapper.mapToDomain(result).also { mutableList ->
+                //Keep the base currency at the correct index
+                mutableList.indexOfFirst { it.currency == base }.let{ index->
+                    if (index != -1) {
+                        val baseCurrency = mutableList[index]
+                        mutableList.removeAt(index)
+                        mutableList.add(0, baseCurrency)
+                    }
+                }
             }
         }
     }

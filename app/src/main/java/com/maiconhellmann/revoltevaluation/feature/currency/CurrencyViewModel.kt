@@ -24,19 +24,19 @@ class CurrencyViewModel(private val useCase: RateUseCase, private val uiSchedule
         value = ViewState.Loading
     }
 
-    fun fetchCurrency(base: String? = null) {
+    fun fetchCurrency(base: String? = null, currentValue: Double?= null) {
         disposables += useCase.fetchRates(base)
             .observeOn(uiScheduler)
             .compose(StateMachineSingle())
             .subscribeBy(
                 onSuccess = {
-                    getCurrencyListByBase(base)
+                    getCurrencyListByBase(base, currentValue)
                 }
             )
     }
 
-    fun getCurrencyListByBase(base: String? = null) {
-        disposables += useCase.getCalculatedRateByBase(base)
+    fun getCurrencyListByBase(base: String? = null, currentValue: Double?= null) {
+        disposables += useCase.getCalculatedRateByBase(base, currentValue)
             .observeOn(uiScheduler)
             .compose (StateMachineSingle())
             .subscribeBy (

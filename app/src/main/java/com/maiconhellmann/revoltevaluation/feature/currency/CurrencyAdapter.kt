@@ -2,7 +2,6 @@ package com.maiconhellmann.revoltevaluation.feature.currency
 
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.maiconhellmann.domain.entity.Rate
@@ -24,7 +23,6 @@ class CurrencyAdapter(private val currencyIconLoader: CurrencyIconLoader) :
         set(value) {
             val wasEmpty = field.isEmpty()
             field = value
-
 
             //only refreshes everything first time
             if(wasEmpty) {
@@ -53,8 +51,7 @@ class CurrencyAdapter(private val currencyIconLoader: CurrencyIconLoader) :
 
             currencyIconLoader.load(model.currency, imageViewCountryFlag)
 
-            editTextCurrencyValue.setOnFocusChangeListener { v, hasFocus ->
-                Log.d(CurrencyAdapter::class.java.simpleName, "OnFocusChangeListener hasFocus $hasFocus")
+            editTextCurrencyValue.setOnFocusChangeListener { _, hasFocus ->
                 if (hasFocus) {
                     val currentIndex = rateList.indexOfFirst { it.currency == model.currency }
 
@@ -82,7 +79,6 @@ class CurrencyAdapter(private val currencyIconLoader: CurrencyIconLoader) :
     private fun createTextWatcherListener(): TextWatcher {
         return object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-
                 //Parse input to double
                 val newValue = if (s.isNullOrEmpty()) {
                     0.0
@@ -94,16 +90,8 @@ class CurrencyAdapter(private val currencyIconLoader: CurrencyIconLoader) :
                     onBaseCurrencyValueChanged?.invoke(rateList.first().base, newValue)
                 }
             }
-
-            override fun beforeTextChanged(
-                s: CharSequence?, start: Int, count: Int, after: Int
-            ) {
-            }
-
-            override fun onTextChanged(
-                s: CharSequence?, start: Int, before: Int, count: Int
-            ) {
-            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         }
     }
 

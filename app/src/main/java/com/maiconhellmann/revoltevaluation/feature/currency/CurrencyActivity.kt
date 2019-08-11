@@ -42,7 +42,7 @@ class CurrencyActivity : AppCompatActivity() {
         viewModel.state.observe(this, Observer { state->
             when (state) {
                 is ViewState.Success -> {
-                    adapter.rateList = state.data
+                    adapter.rateList = state.data.toMutableList()
                 }
             }
         })

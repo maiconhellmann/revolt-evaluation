@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.item_currency.view.*
 
 class CurrencyAdapter(private val currencyIconLoader: CurrencyIconLoader) : RecyclerView.Adapter<CurrencyAdapter.ViewHolder>() {
 
-    var rateList: List<Rate> = listOf()
+    var rateList: MutableList<Rate> = mutableListOf()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -28,6 +28,17 @@ class CurrencyAdapter(private val currencyIconLoader: CurrencyIconLoader) : Recy
             editTextCurrencyValue.setText(getString(R.string.currency_value, model.value))
 
             currencyIconLoader.load(model.currency, imageViewCountryFlag)
+
+            editTextCurrencyValue.setOnFocusChangeListener { v, hasFocus ->
+                if (hasFocus) {
+                    //TODO tests
+                    val currentIndex = rateList.indexOfFirst { it.currency == model.currency }
+                    rateList.removeAt(currentIndex)
+                    rateList.add(0, model)
+
+                    notifyItemMoved(currentIndex, 0)
+                }
+            }
 
             itemView
         }

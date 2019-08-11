@@ -25,11 +25,12 @@ class CurrencyAdapter(private val currencyIconLoader: CurrencyIconLoader) :
             val wasEmpty = field.isEmpty()
             field = value
 
+
             //only refreshes everything first time
             if(wasEmpty) {
                 notifyDataSetChanged()
             } else {
-                rateList.forEachIndexed { index, rate ->
+                rateList.forEachIndexed { index, _ ->
                     if (index > 0) {
                         notifyItemChanged(index)
                     }

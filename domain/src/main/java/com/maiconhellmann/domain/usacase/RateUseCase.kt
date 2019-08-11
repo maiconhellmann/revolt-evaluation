@@ -35,6 +35,8 @@ import io.reactivex.Single
                         } else {
                             rate.value * percent
                         }
+                    } else {
+                        rate.value = currentValue ?: CURRENCY_DEFAULT_VALUE
                     }
                 }
                 rateList

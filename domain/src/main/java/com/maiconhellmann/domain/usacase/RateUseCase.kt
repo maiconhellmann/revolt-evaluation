@@ -50,4 +50,6 @@ import io.reactivex.Single
         return repository.fetchRates(base ?: CURRENCY_DEFAULT_BASE)
             .subscribeOn(scheduler)
     }
+
+    fun subscribeForUpdates() = repository.fetchRates().subscribeOn(scheduler)
 }

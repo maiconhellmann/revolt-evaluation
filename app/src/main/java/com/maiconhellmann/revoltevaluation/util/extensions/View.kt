@@ -4,7 +4,7 @@ import android.view.View
 import android.view.ViewTreeObserver
 
 fun View.visible(visible: Boolean = false) {
-    visibility = if (visible) View.VISIBLE else View.GONE
+    this.visibility = if (visible) View.VISIBLE else View.GONE
 }
 
 fun View.afterLayout(onLayoutMeasure: () -> Unit) {

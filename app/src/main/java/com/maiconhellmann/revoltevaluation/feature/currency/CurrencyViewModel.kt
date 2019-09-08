@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.maiconhellmann.domain.entity.Rate
 import com.maiconhellmann.domain.usacase.RateUseCase
 import com.maiconhellmann.revoltevaluation.feature.common.BaseViewModel
+import com.maiconhellmann.revoltevaluation.feature.common.StateMachineObservable
 import com.maiconhellmann.revoltevaluation.feature.common.StateMachineSingle
 import com.maiconhellmann.revoltevaluation.feature.common.ViewState
 import io.reactivex.Scheduler
@@ -25,11 +26,11 @@ class CurrencyViewModel(private val useCase: RateUseCase, private val uiSchedule
     }
 
     fun fetchCurrency(base: String? = null, currentValue: Double?= null) {
-        disposables += useCase.fetchRates(base)
+        disposables += useCase.subscribeForUpdates()
             .observeOn(uiScheduler)
-            .compose(StateMachineSingle())
+            .compose(StateMachineObservable())
             .subscribeBy(
-                onSuccess = {
+                onNext = {
                     getCurrencyListByBase(base, currentValue)
                 }
             )

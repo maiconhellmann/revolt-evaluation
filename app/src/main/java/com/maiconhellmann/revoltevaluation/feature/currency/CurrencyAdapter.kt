@@ -28,9 +28,9 @@ class CurrencyAdapter(private val currencyIconLoader: CurrencyIconLoader) :
             if(wasEmpty) {
                 notifyDataSetChanged()
             } else {
-                rateList.forEachIndexed { index, _ ->
+                rateList.forEachIndexed { index, item ->
                     if (index > 0) {
-                        notifyItemChanged(index)
+                        notifyItemChanged(index, item)
                     }
                 }
             }
@@ -74,6 +74,10 @@ class CurrencyAdapter(private val currencyIconLoader: CurrencyIconLoader) :
 
             itemView
         }
+
+        fun updateValue(model: Rate) {
+            itemView.editTextCurrencyValue.setText(getString(R.string.currency_value, model.value))
+        }
     }
 
     private fun createTextWatcherListener(): TextWatcher {
@@ -101,5 +105,16 @@ class CurrencyAdapter(private val currencyIconLoader: CurrencyIconLoader) :
     override fun getItemCount(): Int = rateList.size
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(rateList[position])
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int, payloads: MutableList<Any>) {
+        when {
+            payloads.isEmpty() -> holder.bind(rateList[position])
+            else -> {
+                if (payloads[0] is Rate) {
+                    holder.updateValue(payloads[0] as Rate)
+                }
+            }
+        }
     }
 }

@@ -35,7 +35,7 @@ class CurrencyActivity : AppCompatActivity() {
     private fun setupRecyclerView() {
         binding.recyclerView.adapter = adapter
         adapter.onBaseCurrencyChanged = { currency, value ->
-            viewModel.fetchCurrency(currency, value)
+            //viewModel.fetchCurrency(currency, value)
         }
         adapter.onBaseCurrencyValueChanged = { currency, value ->
             viewModel.getCurrencyListByBase(currency, value)

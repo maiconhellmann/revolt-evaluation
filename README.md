@@ -1,7 +1,3 @@
-# revolt-evaluation
-Evaluation project for Revolt
+# revolut-evaluation
+Evaluation project for Revolut
 
-
-RX:
-https://medium.com/@goofyahead/debouncing-edittext-with-rxandroid-894e15da1012
-https://github.com/JakeWharton/RxBinding
